@@ -26,23 +26,31 @@ def suz_top_uyini():
     word = get_word()
     word_letters = set(word)
     user_letters = ""
-    print(f"Men {len(word)} ta harfli so'z o'yladim, uni topa olasizmi?")
+    msg = f"Men {len(word)} ta harfli so'z o'yladim, uni topa olasizmi?"
+    msg += " O'yinni to'xtatish uchun 'STOP' deb yozing"
+    print(msg)
+    
     while len(word_letters)>0:
         print(display(user_letters, word))
         if len(user_letters)>0:
             print(f"Shu vaqtgacha kiritgan harflaringiz: {user_letters}")
             
         letter = input("Harf kiriting:").upper()
-        if letter in user_letters:
-            print("Bu harfni oldinam kiritgansiz. Iltimos boshqa harf kiriting:")
-            continue
-        elif letter in word:
-            word_letters.remove(letter)
-            print(f"{letter} harfi to'g'ri!")
+        if letter.upper() == "STOP":
+            print("Afsus siz bu so'zni topa olmadingiz ):")
+            break
         else:
-            print("Bunday harf yo'q!")
+            if letter in user_letters:
+                print("Bu harfni oldinam kiritgansiz. Iltimos boshqa harf kiriting:")
+                continue
+            elif letter in word:
+                word_letters.remove(letter)
+                print(f"{letter} harfi to'g'ri!")
+            else:
+                print("Bunday harf yo'q!")
+            if len(word_letters) == 0 :
+                print(f"Tabriklayman siz {word} so'zini {len(user_letters)} ta urinish bilan topdingiz!")
         user_letters += letter
-    print(f"Tabriklayman siz {word} so'zini {len(user_letters)} ta urinish bilan topdingiz!")
 
         
 
